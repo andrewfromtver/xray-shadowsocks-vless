@@ -13,6 +13,13 @@ fi
 
 echo
 
+if [ "$1" == "remove" ]; then
+    docker kill xray-shadowsocks-vless 2>/dev/null
+    docker rm xray-shadowsocks-vless 2>/dev/null
+    docker image rm xray-shadowsocks-vless 2>/dev/null
+    echo "Xray-shadowsocks-vless removed."
+    exit 0
+fi
 if [ "$1" == "reload" ]; then
     docker kill xray-shadowsocks-vless 2>/dev/null
     docker rm xray-shadowsocks-vless 2>/dev/null
