@@ -13,26 +13,31 @@ fi
 
 echo
 
-if [ "$1" == "remove" ]; then
-    docker kill xray-shadowsocks-vless 2>/dev/null
-    docker rm xray-shadowsocks-vless 2>/dev/null
-    docker image rm xray-shadowsocks-vless 2>/dev/null
-    echo "Xray-shadowsocks-vless removed."
-    exit 0
-fi
-if [ "$1" == "reload" ]; then
-    docker kill xray-shadowsocks-vless 2>/dev/null
-    docker rm xray-shadowsocks-vless 2>/dev/null
-    docker image rm xray-shadowsocks-vless 2>/dev/null
-fi
-if [[ $1 =~ $EMAIL_REGEX ]]; then
-    docker kill xray-shadowsocks-vless 2>/dev/null
-    docker rm xray-shadowsocks-vless 2>/dev/null
-    docker image rm xray-shadowsocks-vless 2>/dev/null
-    CLIENT_EMAIL=$1
-else
-    echo "Wrong email provided, performing regular deploy command instead."
-    echo
+if [ "$1" ]; then
+    if [[ $1 =~ $EMAIL_REGEX ]]; then
+        docker kill xray-shadowsocks-vless 2>/dev/null
+        docker rm xray-shadowsocks-vless 2>/dev/null
+        docker image rm xray-shadowsocks-vless 2>/dev/null
+        CLIENT_EMAIL=$1
+    else
+        if [ "$1" == "remove" ]; then
+            docker kill xray-shadowsocks-vless 2>/dev/null
+            docker rm xray-shadowsocks-vless 2>/dev/null
+            docker image rm xray-shadowsocks-vless 2>/dev/null
+            echo "Xray-shadowsocks-vless removed."
+            exit 0
+        else
+            if [ "$1" == "reload" ]; then
+                docker kill xray-shadowsocks-vless 2>/dev/null
+                docker rm xray-shadowsocks-vless 2>/dev/null
+                docker image rm xray-shadowsocks-vless 2>/dev/null
+            else
+                echo "Wrong email or param was provided, performing regular deploy command instead."
+                echo "Available params: [reload, remove]"
+                echo
+            fi
+        fi
+    fi
 fi
 
 docker image ls | grep "xray-shadowsocks-vless" || docker build \
