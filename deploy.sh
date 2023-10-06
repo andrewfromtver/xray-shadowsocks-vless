@@ -48,7 +48,9 @@ docker run \
     -p 0.0.0.0:443:443/tcp \
     -p 0.0.0.0:23:23/tcp \
     -p 0.0.0.0:23:23/udp \
-    -d --name xray-shadowsocks-vless xray-shadowsocks-vless 2>/dev/null || echo "Xray container already exists"
+    -d --name xray-shadowsocks-vless \
+    --restart always \
+    xray-shadowsocks-vless 2>/dev/null || echo "Xray container already exists"
 
 echo
 echo "########################### Xray config ###########################"
