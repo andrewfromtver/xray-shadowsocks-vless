@@ -20,7 +20,7 @@ easy "one-click" install of xray server in Docker container
 * `remove` - to remove xray container and image
 * `your@email.com` - to provide your email for xray configuration file
 
-to use option just add it after './deploy.sh' command for example `./deploy.sh reload` or `./deploy.sg user@domain.com`
+to use option just add it after './deploy.sh' command for example `./deploy.sh reload` or `./deploy.sh user@domain.com`
 
 if `./deploy.sh` executed first time - it will build image, start xray container and print client config creds
 
