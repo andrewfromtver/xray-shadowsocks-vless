@@ -34,6 +34,7 @@ RUN touch /opt/xray/vless-connection-string.txt ; \
     echo "vless://"$(head -n 1 /opt/xray/xray-creds.txt)\
 "@127.0.0.1:443?security=reality&sni="$(head -4 /opt/xray/xray-creds.txt | tail -1)\
 "&fp=chrome&pbk="$(cat /opt/xray/xray-creds.txt | grep "Public key" | cut -d " " -f 3)\
+"&sid="$(head -2 /opt/xray/xray-creds.txt | tail -1)\
 "&type=tcp&flow=xtls-rprx-vision&encryption=none#"$(echo $CLIENT_EMAIL | cut -d "@" -f 1)\
  > /opt/xray/vless-connection-string.txt
 
