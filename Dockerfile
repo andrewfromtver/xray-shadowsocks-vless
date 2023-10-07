@@ -30,6 +30,13 @@ RUN sed -i "s/XRAY_UUID/"$(head -n 1 /opt/xray/xray-creds.txt)"/g" /opt/xray/con
     sed -i "s/FAKE_DOMAIN/"$(head -4 /opt/xray/xray-creds.txt | tail -1)"/g" /opt/xray/config.json ; \
     sed -i "s/PRIV_KEY/"$(cat /opt/xray/xray-creds.txt | grep "Private key" | cut -d " " -f 3)"/g" /opt/xray/config.json
 
+RUN touch /opt/xray/vless-connection-string.txt ; \
+    echo "vless://"$(head -n 1 /opt/xray/xray-creds.txt)\
+"@127.0.0.1:443?security=reality&sni="$(head -4 /opt/xray/xray-creds.txt | tail -1)\
+"&fp=chrome&pbk="$(cat /opt/xray/xray-creds.txt | grep "Public key" | cut -d " " -f 3)\
+"&type=tcp&flow=xtls-rprx-vision&encryption=none#"$(echo $CLIENT_EMAIL | cut -d "@" -f 1)\
+ > /opt/xray/vless-connection-string.txt
+
 EXPOSE 23/tcp
 EXPOSE 23/udp
 EXPOSE 443/tcp
