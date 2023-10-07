@@ -20,7 +20,7 @@ easy "one-click" install of xray server in Docker container
 * `remove` - to remove xray container and image
 * `your@email.com` - to provide your email for xray configuration file
 
-to use option just add it after './deploy.sh' command for example `./deploy.sh reload` or `./deploy.sh user@domain.com`
+to use option just add it after `./deploy.sh` command for example `./deploy.sh reload` or `./deploy.sh user@domain.com`
 
 if `./deploy.sh` executed first time - it will build image, start xray container and print client config creds
 
@@ -37,4 +37,4 @@ if execute `./deploy.sh` without option again - it will just print client config
 * vless transport `tcp`
 * vless security `reality`
 
-**WARN** server trys to simulate regular website it uses one addres from `fake_sites.txt` randomly on startup
+**WARN** server trys to simulate regular website it uses one address from `fake_sites.txt` randomly on startup
