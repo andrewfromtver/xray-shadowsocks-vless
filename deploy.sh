@@ -59,3 +59,9 @@ docker exec -it xray-shadowsocks-vless cat /opt/xray/xray-creds.txt
 echo
 echo "###################################################################"
 echo
+echo "####################### Xray connection url #######################"
+echo
+docker exec -it xray-shadowsocks-vless cat /opt/xray/vless-connection-string.txt | sed -r "s/127.0.0.1/"$(hostname -I | cut -d " " -f 1)"/"
+echo
+echo "###################################################################"
+echo
