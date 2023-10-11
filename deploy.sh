@@ -35,9 +35,14 @@ if [ "$1" ]; then
                 docker image rm xray-shadowsocks-vless 2>/dev/null
                 docker volume rm xray_vol 2>/dev/null
             else
-                echo "Wrong email or param was provided, performing regular deploy command instead."
-                echo "Available params: [reload, remove]"
-                echo
+                if [ "$1" == "restart" ]; then
+                    docker kill xray-shadowsocks-vless 2>/dev/null
+                    docker rm xray-shadowsocks-vless 2>/dev/null
+                else
+                    echo "Wrong email or param was provided, performing regular deploy command instead."
+                    echo "Available params: [reload, remove]"
+                    echo
+                fi
             fi
         fi
     fi

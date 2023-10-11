@@ -18,6 +18,7 @@ easy "one-click" install of xray server in Docker container
 `./deploy.sh` script could be executed with special options
 * `reload` - to "clear" init of xray container
 * `remove` - to remove xray container and image
+* `restart` - to recreate container (all settings will be saved)
 * `your@email.com` - to provide your email for xray configuration file
 
 to use option just add it after `./deploy.sh` command for example `./deploy.sh reload` or `./deploy.sh user@domain.com`
