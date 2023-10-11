@@ -42,4 +42,6 @@ EXPOSE 23/tcp
 EXPOSE 23/udp
 EXPOSE 443/tcp
 
+VOLUME ["/opt/xray"]
+
 CMD [ "/opt/xray/xray", "run", "-c", "/opt/xray/config.json" ]
