@@ -19,6 +19,7 @@ easy "one-click" install of xray server in Docker container
 * `reload` - to "clear" init of xray container
 * `remove` - to remove xray container and image
 * `restart` - to recreate container (all settings will be saved)
+* `uuid` - get random uuid (only if xray container is up)
 * `your@email.com` - to provide your email for xray configuration file
 
 to use option just add it after `./deploy.sh` command for example `./deploy.sh reload` or `./deploy.sh user@domain.com`

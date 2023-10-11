@@ -39,9 +39,14 @@ if [ "$1" ]; then
                     docker kill xray-shadowsocks-vless 2>/dev/null
                     docker rm xray-shadowsocks-vless 2>/dev/null
                 else
-                    echo "Wrong email or param was provided, performing regular deploy command instead."
-                    echo "Available params: [reload, remove]"
-                    echo
+                    if [ "$1" == "uuid" ]; then
+                        docker exec -it xray-shadowsocks-vless /opt/xray/xray uuid 2>/dev/null || echo "Please deploy xray server first."
+                        exit 0
+                    else
+                        echo "Wrong email or param was provided, performing regular deploy command instead."
+                        echo "Available params: [reload, remove]"
+                        echo
+                    fi
                 fi
             fi
         fi
