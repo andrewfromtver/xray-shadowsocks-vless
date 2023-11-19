@@ -11,10 +11,6 @@ variable "do_token" {
   type = string
   description = "DigitalOcean access token"
 }
-variable "ssh_key_fingerprint" {
-  type = string
-  description = "SSH key fingerprint"
-}
 variable "image" {
   type = string
   description = "Droplet deployment base image"
@@ -50,6 +46,11 @@ provider "digitalocean" {
   token = var.do_token
 }
 
+resource "digitalocean_ssh_key" "default" {
+  name       = "default_ssh_key"
+  public_key = file("~/.ssh/id_ed25519.pub")
+}
+
 resource "digitalocean_droplet" "xray_server" {
   image       = var.image
   name        = var.hostname
@@ -58,14 +59,14 @@ resource "digitalocean_droplet" "xray_server" {
   monitoring  = true
   ipv6        = false
   backups     = false
-  ssh_keys = [ var.ssh_key_fingerprint ]
-  tags = [ "pet-project", "xray-shadowsocks-vless" ]
+  ssh_keys = [ digitalocean_ssh_key.default.fingerprint ]
+  tags = [ "xray-shadowsocks-vless" ]
 
   connection {
     host = self.ipv4_address
     user = "root"
     type = "ssh"
-    private_key = file("~/.ssh/id_rsa")
+    private_key = file("~/.ssh/id_ed25519")
     timeout = "5m"
   }
 
